@@ -41,6 +41,7 @@ Serving over HTTP is helpful if you later add features that require a server (fe
 
 ## Where to edit content
 
+- Member information is stored in the JavaScript `members` array near the top of the file. Update this array to modify member cards - they are generated dynamically.
 - The singles section is inside `INDEX.html` under the `SINGLES` comment (search for `<!-- SINGLES -->` or `KROME`, `ALL OF GODS MONEY`, `BRACELET`).
 - Each single block contains the title, release date text and two icon links (Spotify + Apple Music). Update the `href` values on those anchor tags to point to per-track URLs if you prefer.
 - The footer contains artist-level links for Spotify and Apple Music and social links for Instagram / TikTok.
