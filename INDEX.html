@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> The Rugbones </title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Define custom Tailwind Configuration for Colors and Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Monoton&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+        
+        /* MONOTON is used for the bold, high-impact titles (like the EPK cover font) */
+        .font-title {
+            font-family: 'Monoton', cursive; 
+        }
+        /* SPACE MONO is used for the clean, app-like descriptions (like the EPK detail font) */
+        .font-body {
+            font-family: 'Space Mono', monospace; 
+        }
+        /* Custom Keyframes for Glitch Effect (Applied to all main titles now) */
+        @keyframes glitch-effect {
+            0% { transform: translate(0); text-shadow: 2px 2px #ff00ff, -2px -2px #ffff00; }
+            20% { transform: translate(-5px, 5px); text-shadow: 1px -1px #00ffff, -1px 1px #ff00ff; }
+            40% { transform: translate(5px, -5px); text-shadow: -2px 1px #ffff00, 2px -1px #ff00ff; }
+            60% { transform: translate(-5px, 0); text-shadow: 1px 2px #00ffff, -1px -2px #ff00ff; }
+            80% { transform: translate(5px, 5px); text-shadow: -1px -2px #ffff00, 1px 2px #ff00ff; }
+            100% { transform: translate(0); text-shadow: 2px 2px #ff00ff, -2px -2px #ffff00; }
+        }
+        
+        .glitch-text {
+            animation: glitch-effect 0.8s infinite alternate;
+        }
+
+        /* Initial state for scroll-revealed elements */
+        .scroll-reveal {
+            opacity: 1; /* Changed from 0 to 1 */
+            transform: translateY(0); /* Removed initial offset */
+            transition: opacity 1s cubic-bezier(0.17, 0.55, 0.55, 1), transform 1s cubic-bezier(0.17, 0.55, 0.55, 1);
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Member Card Hover Effect */
+        .member-card:hover {
+            box-shadow: 0 0 40px rgba(255, 0, 255, 0.8);
+            transform: scale(1.05);
+            border-color: #ff00ff;
+        }
+
+        /* Custom Colors from EPK */
+        .bg-yellow-epk { background-color: #ffff00; }
+        .text-pink-epk { color: #ff00ff; }
+        .border-pink-epk { border-color: #ff00ff; }
+        .text-yellow-epk { color: #ffff00; }
+
+        /* Custom style for the Quote section */
+        .mantra-bg {
+            background: linear-gradient(145deg, #000000 0%, #1a001a 50%, #000000 100%);
+        }
+
+    </style>
+</head>
+<body class="bg-black text-white font-body overflow-x-hidden" onscroll="checkScroll()">
+
+    <!-- Header / YOUTH'S PURE Logo (Page 1) -->
+    <header class="fixed top-0 left-0 right-0 z-50 p-6 bg-black/80 backdrop-blur-sm">
+        <h1 class="text-xl md:text-2xl font-body font-bold text-yellow-epk">YOUTH'S PURE</h1>
+    </header>
+
+    <!-- 1. HOME / LIONGOO MONTE-CARLO (Page 2) -->
+    <section id="home" class="min-h-screen flex flex-col justify-center items-center relative p-4">
+        <div class="absolute inset-0 bg-yellow-epk opacity-10"></div>
+        <div class="relative z-10 text-center">
+            <h2 class="text-4xl md:text-8xl font-title glitch-text text-yellow-epk tracking-widest leading-none">
+                THE RUGBONE'S
+            </h2>
+            <button onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' });"
+                class="mt-12 px-8 py-3 text-lg font-bold bg-pink-epk text-black rounded-full transition-all duration-300 transform hover:scale-110 shadow-lg shadow-pink-epk/50">
+                ENTER THE MOVEMENT
+            </button>
+        </div>
+    </section>
+
+    <!-- 2. WHAT ARE WE? (The Manifesto) (Page 2 & 3) -->
+    <section id="about" class="min-h-screen flex flex-col justify-center p-8 bg-yellow-epk text-black">
+        <div class="max-w-4xl mx-auto scroll-reveal">
+            <!-- Glitch effect added to section title -->
+            <h2 class="text-4xl md:text-6xl font-title mb-8 text-black tracking-widest border-b-4 border-black pb-2 glitch-text">
+                WHAT ARE WE?
+            </h2>
+            <div class="text-xl md:text-3xl font-body space-y-6">
+                <p>More than just a collective. We are a <span class="text-pink-epk font-bold">movement</span>. We are a <span class="text-pink-epk font-bold">sound</span>. We are a <span class="text-pink-epk font-bold">lifestyle</span>.</p>
+                <p>Nine members each with their own unique talents, skills and genius.</p>
+                <p class="text-2xl md:text-4xl font-bold italic">The Rugbones are a microcosm of the artistic revolution happening in Kenya.</p>
+                <p class="text-pink-epk text-3xl md:text-5xl font-extrabold mt-10">
+                    The energy we bring is undeniable, irresistible & irreplaceable.
+                </p>
+                <!-- EPK '10' reference as a subtle counter -->
+                <div class="text-right text-black/50 text-6xl font-title pt-4">09</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. WHO ARE WE? (Members Grid) (Page 4-12) -->
+    <section id="members" class="min-h-screen bg-black py-20 px-4 md:px-8">
+        <div class="max-w-6xl mx-auto">
+             <!-- Glitch effect added to section title -->
+            <h2 class="text-4xl md:text-6xl font-title mb-16 text-pink-epk tracking-widest text-center scroll-reveal glitch-text">
+               
+            </h2>
+
+            <div id="member-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Static member cards -->
+                <div class="member-card bg-black/50 p-6 rounded-xl border-4 border-yellow-epk cursor-pointer transition-all duration-300 relative">
+                    <h3 class="text-3xl font-title text-yellow-epk mb-4">OUKOSEASON</h3>
+                    <div class="h-32 w-32 mx-auto mb-4 border-4 border-pink-epk rounded-full overflow-hidden shadow-lg shadow-pink-epk/50">
+                        <img src="https://placehold.co/128x128/ffff00/000000?text=PFP" alt="OUKOSEASON Profile" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-sm text-gray-300 font-body">Rapper extraodrinaire, stage presence final boss, life of the party, dreams of making strip-club love songs</p>
+                </div>
+
+                <div class="member-card bg-black/50 p-6 rounded-xl border-4 border-yellow-epk cursor-pointer transition-all duration-300 relative">
+                    <h3 class="text-3xl font-title text-yellow-epk mb-4">WASHIRA</h3>
+                    <div class="h-32 w-32 mx-auto mb-4 border-4 border-pink-epk rounded-full overflow-hidden shadow-lg shadow-pink-epk/50">
+                        <img src="https://placehold.co/128x128/ff00ff/000000?text=PFP" alt="WASHIKA Profile" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-sm text-gray-300 font-body">Producer specializing in Baile Funk, can play the hell out of a piano, Songwriter, very blunt: will speak his mind with little hesitation</p>
+                </div>
+
+                <div class="member-card bg-black/50 p-6 rounded-xl border-4 border-yellow-epk cursor-pointer transition-all duration-300 relative">
+                    <h3 class="text-3xl font-title text-yellow-epk mb-4">CAPESPRING</h3>
+                    <div class="h-32 w-32 mx-auto mb-4 border-4 border-pink-epk rounded-full overflow-hidden shadow-lg shadow-pink-epk/50">
+                        <img src="https://placehold.co/128x128/ffff00/000000?text=PFP" alt="CAPESPRING Profile" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-sm text-gray-300 font-body">Rapper/singer, Best dressed, producer, 'If Giveon & Frank Ocean had a baby'</p>
+                </div>
+
+                <div class="member-card bg-black/50 p-6 rounded-xl border-4 border-yellow-epk cursor-pointer transition-all duration-300 relative">
+                    <h3 class="text-3xl font-title text-yellow-epk mb-4">KAY KHALI</h3>
+                    <div class="h-32 w-32 mx-auto mb-4 border-4 border-pink-epk rounded-full overflow-hidden shadow-lg shadow-pink-epk/50">
+                        <img src="https://placehold.co/128x128/ff00ff/000000?text=PFP" alt="KAY KHALI Profile" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-sm text-gray-300 font-body">Rapper/singer, plays electric & bass guitar, Has the group's largest portfolio, Resident YN</p>
+                </div>
+
+                <div class="member-card bg-black/50 p-6 rounded-xl border-4 border-yellow-epk cursor-pointer transition-all duration-300 relative">
+                    <h3 class="text-3xl font-title text-yellow-epk mb-4">OKWIRI</h3>
+                    <div class="h-32 w-32 mx-auto mb-4 border-4 border-pink-epk rounded-full overflow-hidden shadow-lg shadow-pink-epk/50">
+                        <img src="https://placehold.co/128x128/ffff00/000000?text=PFP" alt="OKWIRI Profile" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-sm text-gray-300 font-body">Rapper, Arguably has the hardest bars, Highly opinionated, The glue of the collective</p>
+                </div>
+
+                <div class="member-card bg-black/50 p-6 rounded-xl border-4 border-yellow-epk cursor-pointer transition-all duration-300 relative">
+                    <h3 class="text-3xl font-title text-yellow-epk mb-4">MARS TWIN</h3>
+                    <div class="h-32 w-32 mx-auto mb-4 border-4 border-pink-epk rounded-full overflow-hidden shadow-lg shadow-pink-epk/50">
+                        <img src="https://placehold.co/128x128/ff00ff/000000?text=PFP" alt="MARS TWIN Profile" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-sm text-gray-300 font-body">Founder, Learning to play the guitar, Rapper, unbeatable graphic designer, pretty boy</p>
+                </div>
+
+                <div class="member-card bg-black/50 p-6 rounded-xl border-4 border-yellow-epk cursor-pointer transition-all duration-300 relative">
+                    <h3 class="text-3xl font-title text-yellow-epk mb-4">UMANISIA</h3>
+                    <div class="h-32 w-32 mx-auto mb-4 border-4 border-pink-epk rounded-full overflow-hidden shadow-lg shadow-pink-epk/50">
+                        <img src="https://placehold.co/128x128/ffff00/000000?text=PFP" alt="UMANISIA Profile" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-sm text-gray-300 font-body">Live Sound Engineer, Producer, rapper, coordinator & facilitator, 50% 'Mama hen', 50% 'Always outside the crib'</p>
+                </div>
+
+                <div class="member-card bg-black/50 p-6 rounded-xl border-4 border-yellow-epk cursor-pointer transition-all duration-300 relative">
+                    <h3 class="text-3xl font-title text-yellow-epk mb-4">FK</h3>
+                    <div class="h-32 w-32 mx-auto mb-4 border-4 border-pink-epk rounded-full overflow-hidden shadow-lg shadow-pink-epk/50">
+                        <img src="https://placehold.co/128x128/ff00ff/000000?text=PFP" alt="FK Profile" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-sm text-gray-300 font-body">God-tier producer, Sound Engineer Extraordinaire, Worked with numerous big artists including credits on netflix's 'volume', The most efficient man you'll meet behind a DAW or the wheel - AKA The Computer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 4. THE MANTRA (Representative of high-impact Page 14) -->
+    <section id="mantra" class="min-h-[50vh] flex items-center justify-center p-8 mantra-bg">
+        <div class="max-w-4xl mx-auto text-center scroll-reveal">
+            <p class="text-3xl md:text-5xl font-title text-yellow-epk leading-snug">
+                "We are the sound of the future,<br>filtered through the dust of Nairobi."
+            </p>
+            <p class="mt-6 text-xl text-pink-epk font-body font-bold tracking-widest">
+                THIS IS WHAT'S NEXT.
+            </p>
+        </div>
+    </section>
+
+    <!-- 5. PROJECTS: THE SOUND (Page 13 & 15) -->
+    <section id="projects" class="min-h-screen py-20 px-4 md:px-8 bg-black relative">
+        <div class="absolute inset-0 bg-pink-epk opacity-10"></div>
+        <div class="max-w-5xl mx-auto relative z-10 space-y-20">
+             <!-- Glitch effect added to section title -->
+            <h2 class="text-4xl md:text-6xl font-title mb-16 text-yellow-epk tracking-widest text-center scroll-reveal glitch-text">
+                THE SOUND
+            </h2>
+
+            <!-- GUMBO BONEZ N' ALL (Page 13) -->
+            <div class="flex flex-col lg:flex-row gap-12 scroll-reveal">
+                <div class="lg:w-1/3 p-4 border-4 border-pink-epk rounded-xl transform hover:scale-[1.02] transition-transform duration-500 bg-black/50">
+                    <!-- Updated Placeholder Album Art Image -->
+                    <img src="https://placehold.co/400x400/1e1e1e/ffff00?text=GUMBO+BONEZ%0A+N'+ALL%0A+DEBUT+EP" 
+                         alt="Gumbo Bonez N' All Album Art Placeholder" 
+                         class="w-full rounded-lg shadow-2xl shadow-pink-epk/30">
+                </div>
+                <div class="lg:w-2/3">
+                    <h3 class="text-4xl md:text-5xl font-title text-yellow-epk mb-4">GUMBO BONEZ N' ALL (2023)</h3>
+                    <p class="text-lg text-gray-300 font-body mb-6">
+                        The debut project from Kenyan collective 'The Rugbones'. The EP's title 'GUMBO' serves as a metaphor for a melting pot of diverse talents, blending musical styles and experiences that will captivate listeners. With this ambitious project, The Rugbones intend to redefine boundaries, push the envelope of creativity, and establish themselves as true innovators in the Kenyan rap scene.
+                    </p>
+                    <div class="border-t border-b border-pink-epk py-4">
+                        <h4 class="text-2xl text-pink-epk font-bold mb-3">Tracklist:</h4>
+                        <ul class="grid grid-cols-2 gap-2 text-gray-400 font-body">
+                            <li>GOLDMOUTH (LALALA)</li>
+                            <li>Bonez</li>
+                            <li>When It's Over</li>
+                            <li>Ghetto Potpourri</li>
+                            <li>TWO PHONE</li>
+                            <li>2 AT ONCE</li>
+                            <li>HUNNID MIL</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COUNTY POLITICS 1 (Page 15) -->
+            <div class="flex flex-col lg:flex-row-reverse gap-12 scroll-reveal">
+                <div class="lg:w-1/3 p-4 border-4 border-yellow-epk rounded-xl transform hover:scale-[1.02] transition-transform duration-500 bg-black/50">
+                    <!-- Updated Placeholder Group Image -->
+                    <img src="https://placehold.co/400x400/ff00ff/000000?text=RUGBONES%0A+COUNTY%0A+POLITICS+1" 
+                         alt="County Politics 1 Group Photo Placeholder" 
+                         class="w-full rounded-lg shadow-2xl shadow-yellow-epk/30 filter grayscale hover:grayscale-0 transition-all duration-700">
+                </div>
+                <div class="lg:w-2/3">
+                    <h3 class="text-4xl md:text-5xl font-title text-pink-epk mb-4 text-right lg:text-left">COUNTY POLITICS 1 (UPCOMING)</h3>
+                    <p class="text-lg text-gray-300 font-body mb-6 text-right lg:text-left">
+                        The upcoming EP by The Rugbones. In collaboration with producer **'Vilan'**, the group takes on a new, grimier sound.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SINGLES -->
+            <div class="flex flex-col gap-8 scroll-reveal">
+                <h3 class="text-4xl md:text-5xl font-title text-yellow-epk mb-4 text-center">SINGLES</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- KROME -->
+                    <div class="bg-black/50 p-6 rounded-xl border-4 border-pink-epk transform hover:scale-[1.02] transition-transform duration-500">
+                        <div class="aspect-square mb-4 border-2 border-yellow-epk rounded-lg overflow-hidden">
+                            <img src="https://placehold.co/400x400/1e1e1e/ff00ff?text=KROME" alt="KROME Cover" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-2xl font-title text-pink-epk mb-2">KROME</h4>
+                        <p class="text-gray-400 font-body text-sm">Nov. 15, 2024</p>
+                        <div class="flex gap-2 mt-4">
+                            <a href="https://open.spotify.com/track/6UdO3C99p89noNBpoS4ljj?si=762c8dd3ad7f4014" target="_blank" rel="noopener noreferrer" class="text-yellow-epk hover:text-pink-epk transition-colors duration-300">
+                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                                </svg>
+                            </a>
+                            <a href="https://music.apple.com/us/song/k-rome/1778523538" target="_blank" rel="noopener noreferrer" class="text-yellow-epk hover:text-pink-epk transition-colors duration-300">
+                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53-1.71-2.52-3.02-7.13-1.26-10.21.87-1.5 2.42-2.45 4.07-2.47 1.27-.02 2.49.86 3.27.86.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.31 2.93M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- ALL OF GODS MONEY -->
+                    <div class="bg-black/50 p-6 rounded-xl border-4 border-pink-epk transform hover:scale-[1.02] transition-transform duration-500">
+                        <div class="aspect-square mb-4 border-2 border-yellow-epk rounded-lg overflow-hidden">
+                            <img src="https://placehold.co/400x400/1e1e1e/ff00ff?text=ALL+OF+GODS+MONEY" alt="ALL OF GODS MONEY Cover" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-2xl font-title text-pink-epk mb-2">ALL OF GODS MONEY</h4>
+                        <p class="text-gray-400 font-body text-sm">Oct. 24th 2025</p>
+                        <div class="flex gap-2 mt-4">
+                            <a href="https://open.spotify.com/track/1HFm6NrTv8hDeOL0k7QWVF?si=2876806ed2f64fa3" target="_blank" rel="noopener noreferrer" class="text-yellow-epk hover:text-pink-epk transition-colors duration-300">
+                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                                </svg>
+                            </a>
+                            <a href="https://music.apple.com/us/song/all-of-gods-money/1849137573" target="_blank" rel="noopener noreferrer" class="text-yellow-epk hover:text-pink-epk transition-colors duration-300">
+                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53-1.71-2.52-3.02-7.13-1.26-10.21.87-1.5 2.42-2.45 4.07-2.47 1.27-.02 2.49.86 3.27.86.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.31 2.93M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- BRACELET -->
+                    <div class="bg-black/50 p-6 rounded-xl border-4 border-pink-epk transform hover:scale-[1.02] transition-transform duration-500">
+                        <div class="aspect-square mb-4 border-2 border-yellow-epk rounded-lg overflow-hidden">
+                            <img src="https://placehold.co/400x400/1e1e1e/ff00ff?text=BRACELET" alt="BRACELET Cover" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-2xl font-title text-pink-epk mb-2">BRACELET</h4>
+                        <p class="text-gray-400 font-body text-sm">Apr. 11th 2025</p>
+                        <div class="flex gap-2 mt-4">
+                            <a href="https://open.spotify.com/album/3lWSIqtBt4AdJCior2B6tP?si=LcgDtWD7QWGQZsuAA5atdQ" target="_blank" rel="noopener noreferrer" class="text-yellow-epk hover:text-pink-epk transition-colors duration-300">
+                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                                </svg>
+                            </a>
+                            <a href="https://music.apple.com/us/song/bracelet/1806240974" class="text-yellow-epk hover:text-pink-epk transition-colors duration-300">
+                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53-1.71-2.52-3.02-7.13-1.26-10.21.87-1.5 2.42-2.45 4.07-2.47 1.27-.02 2.49.86 3.27.86.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.31 2.93M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. CONTACT / WHAT'S NEXT? (Page 16) -->
+    <section id="contact" class="min-h-[50vh] flex flex-col justify-center items-center p-8 bg-yellow-epk/90 backdrop-blur-sm text-black relative">
+         <!-- Glitch effect added to section title -->
+        <h2 class="text-5xl md:text-8xl font-title text-black tracking-widest mb-12 scroll-reveal glitch-text">
+            FOR PRESS INQUIRIES/PHOTOS CAN EMAIL:
+        </h2>
+        <div class="text-center scroll-reveal">
+            <p class="text-lg md:text-2xl font-body mb-6">FOR PRESS PHOTOS AND ADDITIONAL INFORMATION EMAIL:</p>
+            <a href="mailto:contact.ingoodco@gmail.com"
+                class="text-2xl md:text-4xl font-bold font-title text-pink-epk tracking-wider inline-block
+                       bg-black p-4 rounded-xl transition-all duration-500 hover:scale-[1.05] hover:shadow-2xl hover:shadow-pink-epk/70">
+                contact.ingoodco@gmail.com
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer with Social Media Links -->
+    <footer class="bg-black py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <!-- Social Media Links -->
+            <div class="flex flex-wrap justify-center gap-8 mb-8">
+                <!-- Instagram -->
+                <a href="https://instagram.com/therugbones" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center gap-2 text-yellow-epk hover:text-pink-epk transition-colors duration-300">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    <span class="text-lg font-body">@therugbones</span>
+                </a>
+
+                <!-- TikTok -->
+                <a href="https://tiktok.com/@therugbones" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center gap-2 text-yellow-epk hover:text-pink-epk transition-colors duration-300">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                    </svg>
+                    <span class="text-lg font-body">@therugbones</span>
+                </a>
+
+                <!-- Spotify -->
+                <a href="https://open.spotify.com/artist/therugbones" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center gap-2 text-yellow-epk hover:text-pink-epk transition-colors duration-300">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                    </svg>
+                    <span class="text-lg font-body">The Rugbones</span>
+                </a>
+
+                <!-- Apple Music -->
+                <a href="https://music.apple.com/us/artist/the-rugbones/1691922711" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center gap-2 text-yellow-epk hover:text-pink-epk transition-colors duration-300">
+                    <!-- Apple Logo -->
+                    <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53-1.71-2.52-3.02-7.13-1.26-10.21.87-1.5 2.42-2.45 4.07-2.47 1.27-.02 2.49.86 3.27.86.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.31 2.93M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    <span class="text-lg font-body">The Rugbones</span>
+                </a>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center text-gray-500 font-body text-sm">
+                <p>&copy; 2025 The Rugbones. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA DEFINITION (Corrected names based on PDF) ---
+        const members = [
+            
+            { name: "OUKOSEASON", details: "Rapper extraodrinaire, stage presence final boss, life of the party, dreams of making strip-club love songs", sound: "mic-drop" },
+            // Corrected WASHIKA
+            { name: "WASHIKA", details: "Producer specializing in Baile Funk, can play the hell out of a piano, Songwriter, very blunt: will speak his mind with little hesitation", sound: "piano-chord" },
+            { name: "CAPESPRING", details: "Rapper/singer, Best dressed, producer, 'If Giveon & Frank Ocean had a baby'", sound: "vocal-harmony" },
+            { name: "KAY KHALI", details: "Rapper/singer, plays electric & bass guitar, Has the group's largest portfolio, Resident YN", sound: "guitar-riff" },
+    
+            { name: "OKWIRI", details: "Rapper, Arguably has the hardest bars, Highly opinionated, The glue of the collective", sound: "lyrical-burst" },
+           
+            { name: "MARS TWIN", details: "Founder, Learning to play the guitar, Rapper, unbeatable graphic designer, pretty boy", sound: "design-transition" },
+            { name: "UMANISIA", details: "Live Sound Engineer, Producer, rapper, coordinator & facilitator, 50% 'Mama hen', 50% 'Always outside the crib'", sound: "perfect-mix" },
+            { name: "FK", details: "God-tier producer, Sound Engineer Extraordinaire, Worked with numerous big artists including credits on netflix's 'volume', The most efficient man you'll meet behind a DAW or the wheel - AKA The Computer", sound: "complex-beat" },
+        ];
+
+        // --- MEMBER CARD GENERATION ---
+        function generateMemberCards() {
+            const grid = document.getElementById('member-grid');
+            grid.innerHTML = members.map((member, index) => {
+                // Alternating color for visual contrast
+                const bgColor = index % 2 === 0 ? 'ffff00' : 'ff00ff';
+                const textColor = '000000'; // Black text on bright backgrounds
+                
+                return `
+                    <div class="member-card scroll-reveal bg-black/50 p-6 rounded-xl border-4 border-yellow-epk cursor-pointer transition-all duration-300 relative"
+                        data-index="${index}"
+                        onmouseover="simulateSound('${member.sound}')"
+                        data-sound="${member.sound}">
+                        
+                        <!-- Uses font-title (Monoton) for high impact name -->
+                        <h3 class="text-3xl font-title text-yellow-epk mb-4">${member.name}</h3>
+                        
+                        <!-- Updated Placeholder Silhouette/Image -->
+                        <div class="h-32 w-32 mx-auto mb-4 border-4 border-pink-epk rounded-full overflow-hidden shadow-lg shadow-pink-epk/50">
+                            <img src="https://placehold.co/128x128/${bgColor}/${textColor}?text=PFP" 
+                                alt="${member.name} Profile Placeholder" 
+                                class="w-full h-full object-cover">
+                        </div>
+
+                        <!-- Uses font-body (Space Mono) for clean details -->
+                        <p class="text-sm text-gray-300 font-body">${member.details}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // --- SCROLL REVEAL LOGIC ---
+        const revealElements = document.querySelectorAll('.scroll-reveal');
+
+        function checkScroll() {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                // Reveal if element is 150px into the viewport
+                if (elementTop < windowHeight - 150) {
+                    el.classList.add('visible');
+                    // Once visible, keep visible
+                    el.style.opacity = "1";
+                    el.style.transform = "translateY(0)";
+                }
+                // Removed the else clause so elements stay visible
+            });
+        }
+
+        // --- SIMULATED SOUND FUNCTION (No actual audio files used) ---
+        function simulateSound(soundName) {
+            console.log(`Sound cue triggered for: ${soundName}`);
+            // This function simulates the immersive audio element on hover.
+        }
+        
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', function() {
+            generateMemberCards();
+            checkScroll(); // Check visibility on load
+        });
+
+        // Backup initialization in case DOMContentLoaded already fired
+        if (document.readyState === 'complete') {
+            generateMemberCards();
+            checkScroll();
+        }
+    </script>
+</body>
+</html>
